@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<content>
+	<board version = "0.0"></board>
+
+	<map width = "15" height = "6">
+		<tiles>
+			mmmmfwwffffffff
+			fmmfwwrrrrrrffw
+			mmfwwwrffffrwww
+			rrrrrrrffffrfww
+			fffffhhffhhrrrr
+			mmffhhhhffhfmmm
+		</tiles>
+
+		<objects>
+			-------wwdww---
+			---------------
+			------r--------
+			------------r--
+			-r--r----------
+			---------------
+		</objects>
+
+		<enemies>
+			---------------
+			------b---b----
+			---------------
+			---b--b--------
+			---------------
+			---------------
+		</enemies>
+
+		<items>
+			-------------p-
+			---------------
+			---------------
+			---------------
+			---------------
+			---------------
+		</items>
+	</map>
+	
+	// List of all types of tiles with their corresponding cost.
+	// Editor will allow to make changes here and add some other tile types.
+	<types>
+		<type>w - 0</type>
+		<type>r - 1</type>
+		<type>h - 3</type>
+		<type>f - 5</type>
+		<type>m - 7</type>
+	</types>
+</content>
