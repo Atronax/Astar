@@ -29,10 +29,12 @@ void Tile::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
     // If spritesheet is used to draw tile, select current frame and draw it here.
     // Otherwise, simply fill the background with dark gray color.
-    if (m_spritesheet)
-        painter->drawImage(boundingRect(), m_spritesheet->currentFrame());
+
+    // Something in spritesheet causes out of bound list
+    if (m_spritesheet && !m_spritesheet->empty())
+       painter->drawImage(boundingRect(), m_spritesheet->currentFrame());
     else
-        painter->fillRect (boundingRect(), QColor("#111"));
+       painter->fillRect (boundingRect(), QColor("#111"));
 
     // Draw bounding rectange.
     painter->setPen(m_borderPen);
@@ -171,7 +173,7 @@ void Tile::generate(const Tile::TileType &type)
         break;
 
         case TileType::HILL:
-        m_spritesheet = new Spritesheet("D:/grass.png", 100, 100, 4, this);
+        m_spritesheet = new Spritesheet("c:/grass.png", 100, 100, 4, this);
         m_movementCost = 3;
         m_isTracable = true;
         break;

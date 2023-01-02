@@ -14,6 +14,7 @@ class Spritesheet : public QObject
 public:
     explicit Spritesheet(const QString& filename, int frameWidth, int frameHeight, int fps, QGraphicsItem* parent = nullptr);
 
+    bool empty() const;
     const QImage& currentFrame() const;
 
     inline void operator= (const Spritesheet& rhs)

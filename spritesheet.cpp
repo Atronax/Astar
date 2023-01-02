@@ -1,5 +1,6 @@
 #include "spritesheet.h"
 
+#include <QFileInfo>
 #include <QDebug>
 
 Spritesheet::Spritesheet(const QString &filename, int frameWidth, int frameHeight, int fps, QGraphicsItem *parent)
@@ -7,6 +8,11 @@ Spritesheet::Spritesheet(const QString &filename, int frameWidth, int frameHeigh
     m_parent = parent;
     loadFromFile(filename, frameWidth, frameHeight);
     prepareAnimation(fps);
+}
+
+bool Spritesheet::empty() const
+{
+    return m_frames->empty();
 }
 
 const QImage &Spritesheet::currentFrame() const
@@ -28,8 +34,10 @@ void Spritesheet::cutAnimation(const QImage &atlas, int frameWidth, int frameHei
 {
     m_frames = new QList<QImage>();
     for (int h = 0; h < atlas.height(); h += frameHeight)
-        for (int w = 0; w < atlas.height(); w += frameWidth)
+        for (int w = 0; w < atlas.width(); w += frameWidth)
             m_frames->append(atlas.copy(w, h, frameWidth, frameHeight));
+
+    qDebug() << "Atlas: " << atlas.size() << "Images: " << m_frames->size();
 }
 
 void Spritesheet::prepareAnimation(int fps)
@@ -42,6 +50,8 @@ void Spritesheet::prepareAnimation(int fps)
 
 void Spritesheet::onAnimationTick()
 {
+    qDebug() << "in Spritesheet:onAnimationTrick";
+
     if(m_frames->isEmpty())
         return;
 
@@ -62,6 +72,7 @@ void Spritesheet::onAnimationTick()
             forward = true;
     }
 
+    qDebug() << m_currentFrameIndex << m_frames->size();
 
     if (m_parent)
         m_parent->update();
